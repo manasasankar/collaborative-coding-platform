@@ -12,4 +12,82 @@ code {
     monospace;
 }
 
+/* === Paste this into src/index.css / App.css (aggressive isolation) === */
 
+.CodeMirror,
+.CodeMirror-scroll,
+.CodeMirror-sizer {
+  width: 100% !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+  text-align: left !important;
+  direction: ltr !important;
+  transform: none !important;         /* kill ancestor transforms */
+  zoom: 1 !important;                 /* neutralize zoom hacks */
+}
+
+/* Strict monospace + no ligatures + exact glyph rendering */
+.CodeMirror {
+  font-family: "Consolas", "Courier New", monospace !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  font-variant-ligatures: none !important;
+  font-feature-settings: "liga" 0, "calt" 0 !important;
+  text-rendering: geometricPrecision !important;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+}
+
+/* Gutter spacing so text never overlaps numbers */
+.CodeMirror-gutters {
+  min-width: 56px !important;
+  padding-right: 12px !important;
+  background: transparent !important;
+  border-right: none !important;
+  box-sizing: content-box !important;
+}
+.CodeMirror-linenumber {
+  padding: 0 6px 0 0 !important;
+  display: inline-block !important;
+}
+
+/* Code area: NO extra padding on the text node, small left padding to clear gutter */
+.CodeMirror pre,
+.CodeMirror .CodeMirror-code {
+  padding-left: 8px !important;   /* 8–12px feels like VSCode */
+  margin: 0 !important;
+  white-space: pre !important;
+  text-indent: 0 !important;
+  direction: ltr !important;
+  letter-spacing: normal !important;
+}
+
+/* Scroll area / final guards */
+.CodeMirror-scroll {
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: auto !important;
+  transform: none !important;
+}
+
+/* Protect against leaked text-align / other rules */
+.CodeMirror,
+.CodeMirror * {
+  text-align: left !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+/* === Absolute last-resort caret alignment fix === */
+.CodeMirror pre,
+.CodeMirror .CodeMirror-code pre,
+.CodeMirror-line,
+.CodeMirror-line span {
+  display: inline !important;
+  white-space: pre !important;
+  position: static !important;
+  overflow: visible !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  letter-spacing: normal !important;
+}

@@ -21,7 +21,7 @@ const Editor = ({ socketRef, roomId, onCodeChange}) => {
           autoCloseBrackets: true,
           lineNumbers: true,
           viewportMargin: Infinity,
-          lineWrapping: true,
+          lineWrapping: false,
         }
       );
 
@@ -62,8 +62,8 @@ const Editor = ({ socketRef, roomId, onCodeChange}) => {
   }, [socketRef]);
 
   return (
-    <div style={{ height: "100vh" }}>
-      <textarea id="realtimeEditor"></textarea>
+    <div style={{ height: "100%", transform: "none", zoom: 1 }}>
+      <textarea id="realtimeEditor" style={{ width: "100%", height: "100%" }}></textarea>
     </div>
   );
 };
